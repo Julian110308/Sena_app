@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Instructores SENA - SENA APP{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Lista de Instructores SENA</h2>
+            <div>
+                <span class="badge bg-info fs-6">Total: <span class="visually-hidden">Hay </span>{{ total_instructores }} Instructores</span>
+                <a href="{% url 'admin:instructores_instructor_add' %}" class="btn btn-success ms-2" role="button" aria-label="Añadir nuevo instructor">
+                    <i class="fas fa-plus-circle me-1"></i> Nuevo Instructor
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if lista_instructores %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for instructor in lista_instructores %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">{{ instructor.nombre_completo }}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text mb-1"><strong>Documento:</strong> {{ instructor.documento_identidad }} ({{ instructor.tipo_documento }})</p>
+                <p class="card-text mb-1"><strong>Correo:</strong> <a href="mailto:{{ instructor.correo }}" class="link-primary">{{ instructor.correo }}</a></p>
+                <p class="card-text mb-1"><strong>Teléfono:</strong> {{ instructor.telefono }}</p>
+                <p class="card-text mb-1"><strong>Ciudad:</strong> {{ instructor.ciudad }}</p>
+                <p class="card-text mb-1"><strong>Dirección:</strong> {{ instructor.direccion }}</p>
+                <p class="card-text mb-1"><strong>Nivel Educativo:</strong> <span class="text-muted" title="{{ instructor.nivel_educativo }}">{{ instructor.nivel_educativo }}</span></p>
+                <p class="card-text mb-1"><strong>Fecha Nacimiento:</strong> {{ instructor.fecha_nacimiento|date:"d/m/Y" }}</p>
+                <p class="card-text mb-3"><strong>Especialidad:</strong> <span class="text-muted" title="{{ instructor.especialidad }}">{{ instructor.especialidad }}</span></p>
+            </div>
+            <div class="card-footer d-flex justify-content-end bg-light border-top-0">
+                <a href="{% url 'admin:instructores_instructor_change' instructor.pk %}"
+                   class="btn btn-sm btn-outline-primary" role="button" aria-label="Editar información de {{ instructor.nombre_completo }}">
+                    <i class="fas fa-edit"></i> Editar
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">No hay Instructores registrados</h4>
+            <p>Aún no se han registrado Instructores en el sistema. ¡Es un buen momento para empezar!</p>
+            <hr>
+            <p class="mb-0">
+                <a href="{% url 'admin:instructores_instructor_add' %}" class="btn btn-success" role="button" aria-label="Registrar el primer instructor">
+                    <i class="fas fa-user-plus me-1"></i> Registrar Primer Instructor
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
