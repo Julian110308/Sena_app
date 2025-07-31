@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Aprendices SENA - SENA APP{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Lista de Aprendices SENA</h2>
+            <div>
+                <span class="badge bg-info fs-6">Total: <span class="visually-hidden">Hay </span>{{ total_aprendices }} aprendices</span>
+                <a href="{% url 'admin:aprendices_aprendiz_add' %}" class="btn btn-success ms-2" role="button" aria-label="Añadir nuevo aprendiz">
+                    <i class="fas fa-plus-circle me-1"></i> Nuevo Aprendiz
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if lista_aprendices %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"> {# Grid para organizar las tarjetas en columnas #}
+    {% for aprendiz in lista_aprendices %}
+    <div class="col">
+        <div class="card h-100 shadow-sm"> {# h-100 asegura que todas las tarjetas tengan la misma altura #}
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">{{ aprendiz.nombre_completo }}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text mb-1"><strong>Documento:</strong> {{ aprendiz.documento_identidad }}</p>
+                <p class="card-text mb-1"><strong>Correo:</strong> <a href="mailto:{{ aprendiz.correo }}" class="link-primary">{{ aprendiz.correo }}</a></p>
+                <p class="card-text mb-1"><strong>Teléfono:</strong> {{ aprendiz.telefono }}</p>
+                <p class="card-text mb-1"><strong>Ciudad:</strong> {{ aprendiz.ciudad }}</p>
+                <p class="card-text mb-1"><strong>Programa:</strong> <span class="text-muted" title="{{ aprendiz.programa }}">{{ aprendiz.programa }}</span></p>
+                <p class="card-text mb-3"><strong>Fecha Nacimiento:</strong> {{ aprendiz.fecha_nacimiento|date:"d/m/Y" }}</p>
+            </div>
+            <div class="card-footer d-flex justify-content-end bg-light border-top-0">
+                <a href="{% url 'admin:aprendices_aprendiz_change' aprendiz.pk %}"
+                   class="btn btn-sm btn-outline-primary" role="button" aria-label="Editar información de {{ aprendiz.nombre_completo }}">
+                    <i class="fas fa-edit"></i> Editar
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">No hay aprendices registrados</h4>
+            <p>Aún no se han registrado aprendices en el sistema. ¡Es un buen momento para empezar!</p>
+            <hr>
+            <p class="mb-0">
+                <a href="{% url 'admin:aprendices_aprendiz_add' %}" class="btn btn-success" role="button" aria-label="Registrar el primer aprendiz">
+                    <i class="fas fa-user-plus me-1"></i> Registrar Primer Aprendiz
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
