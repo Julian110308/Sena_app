@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Programas SENA - SENA APP{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Lista de Programas que el SENA ofrece</h2>
+            <div>
+                <span class="badge bg-info fs-6">Total: <span class="visually-hidden">Hay </span>{{ total_programas }} Programas</span>
+                <a href="{% url 'admin:programas_programa_add' %}" class="btn btn-success ms-2" role="button" aria-label="Añadir nuevo programa">
+                    <i class="fas fa-plus-circle me-1"></i> Nuevo Programa
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if lista_programas %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for programa in lista_programas %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">{{ programa.nombre }}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text mb-1"><strong>Código:</strong> {{ programa.codigo }}</p>
+                <p class="card-text mb-1"><strong>Nivel Formación:</strong> <span class="text-muted" title="{{ programa.nivel_formacion }}">{{ programa.nivel_formacion }}</span></p>
+                <p class="card-text mb-1"><strong>Modalidad:</strong> {{ programa.modalidad }}</p>
+                <p class="card-text mb-1"><strong>Duración:</strong> {{ programa.duracion_meses }} meses</p>
+                <p class="card-text mb-1"><strong>Descripción:</strong> <span class="text-muted">{{ programa.descripcion|truncatechars:100 }}</span></p>
+                <p class="card-text mb-1"><strong>Centro Formación:</strong> <span class="text-muted" title="{{ programa.centro_formacion }}">{{ programa.centro_formacion }}</span></p>
+                <p class="card-text mb-3"><strong>Regional:</strong> <span class="text-muted" title="{{ programa.regional }}">{{ programa.regional }}</span></p>
+            </div>
+            <div class="card-footer d-flex justify-content-end bg-light border-top-0">
+                <a href="{% url 'admin:programas_programa_change' programa.pk %}"
+                   class="btn btn-sm btn-outline-primary" role="button" aria-label="Editar información del programa {{ programa.nombre }}">
+                    <i class="fas fa-edit"></i> Editar
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">No hay Programas registrados</h4>
+            <p>Aún no se han registrado Programas en el sistema. ¡Es un buen momento para empezar!</p>
+            <hr>
+            <p class="mb-0">
+                <a href="{% url 'admin:programas_programa_add' %}" class="btn btn-success" role="button" aria-label="Registrar el primer programa">
+                    <i class="fas fa-file-alt me-1"></i> Registrar Primer Programa
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
