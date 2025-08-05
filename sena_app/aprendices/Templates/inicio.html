@@ -5,50 +5,65 @@
 {% block content %}
 <div class="row">
     <div class="col-12">
-        <div class="jumbotron text-white p-5 rounded">
+        <div class="jumbotron bg-success text-white p-5 rounded">
             <h1 class="display-4">Bienvenido a SENA APP</h1>
-            <p class="lead">Sistema de Gestión de Aprendices, Instructores y Programas del Servicio Nacional de Aprendizaje.</p>
+            <p class="lead">Sistema de Gestión de Aprendices del Servicio Nacional de Aprendizaje</p>
             <hr class="my-4">
-            <p>Explora y administra la información de forma eficiente a través de los módulos a continuación.</p>
-            {# Se eliminan los botones directos del jumbotron #}
+            <p>Administra y consulta la información de los aprendices e instructores de manera eficiente.</p>
+            <a class="btn btn-light btn-lg" href="{% url 'aprendices:lista_aprendices' %}" role="button">
+                Ver Aprendices
+            </a>
+            <a class="btn btn-light btn-lg" href="{% url 'instructores:lista_instructores' %}" role="button">
+                Ver Instructores
+            </a>
+            <a class="btn btn-light btn-lg" href="{% url 'programas:lista_programas' %}" role="button">
+                Ver Programas
+            </a>
+            <a class="btn btn-light btn-lg" href="{% url 'aprendices:lista_cursos' %}" role="button">
+                Ver Cursos
+            </a>
         </div>
     </div>
 </div>
 
-<div class="row mt-5 justify-content-center g-4">
-    <div class="col-md-4 col-lg-3">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body text-center">
-                <i class="fas fa-user-graduate fa-3x text-success mb-3"></i>
-                <h4 class="card-title">Aprendices</h4>
-                <p class="card-text">Gestiona los detalles y el progreso de todos los aprendices registrados.</p>
-                <a href="{% url 'aprendices:lista_aprendices' %}" class="btn btn-success mt-3" role="button" aria-label="Ir a lista de aprendices">
-                    Ir al Módulo <i class="fas fa-arrow-right ms-2"></i>
-                </a>
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Lista de Aprendices</h5>
+                <p class="card-text">Consulta todos los aprendices registrados en el sistema.</p>
+                <p class="card-text">Total de Aprendices: {{ total_aprendices}}</p>
+                <a href="{% url 'aprendices:lista_aprendices' %}" class="btn btn-success">Ver Lista</a>
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-lg-3">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body text-center">
-                <i class="fas fa-chalkboard-teacher fa-3x text-success mb-3"></i>
-                <h4 class="card-title">Instructores</h4>
-                <p class="card-text">Accede y administra la información de los instructores del SENA.</p>
-                <a href="{% url 'instructores:lista_instructores' %}" class="btn btn-success mt-3" role="button" aria-label="Ir a lista de instructores">
-                    Ir al Módulo <i class="fas fa-arrow-right ms-2"></i>
-                </a>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Lista de Instructores</h5>
+                <p class="card-text">Consulta todos los instructores registrados en el sistema.</p>
+                <a href="{% url 'instructores:lista_instructores' %}" class="btn btn-success">Ver Lista</a>
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-lg-3">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body text-center">
-                <i class="fas fa-book-open fa-3x text-success mb-3"></i>
-                <h4 class="card-title">Programas</h4>
-                <p class="card-text">Consulta y gestiona la oferta académica y los programas de formación.</p>
-                <a href="{% url 'programas:lista_programas' %}" class="btn btn-success mt-3" role="button" aria-label="Ir a lista de programas">
-                    Ir al Módulo <i class="fas fa-arrow-right ms-2"></i>
-                </a>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Lista de Programas</h5>
+                <p class="card-text">Consulta todos los programas registrados en el sistema</p>
+                <a href="{% url 'programas:lista_programas' %}" class="btn btn-success">Ver Lista</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mt-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Lista de Cursos</h5>
+                <p class="card-text">Consulta todos los Cursos registrados en el sistema</p>
+                <p class="card-text">Total de Cursos: {{ total_cursos}}</p>
+                <p class="card-text">Cursos Activos: {{ cursos_activos}}</p>
+                <a href="{% url 'aprendices:lista_cursos' %}" class="btn btn-success">Ver Lista</a>
             </div>
         </div>
     </div>
