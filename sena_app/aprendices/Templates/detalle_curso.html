@@ -15,135 +15,106 @@
         </div>
     </div>
 
-    <!-- Información Básica del Curso -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card shadow-sm">
-                <div class="card-header d-flex align-items-center">
-                    <i class="bi bi-book-fill me-2"></i>
-                    <h4 class="mb-0">Información del Curso</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h2 class="text-primary mb-3">{{ curso.nombre }}</h2>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-2">
-                                        <strong><i class="bi bi-hash text-muted me-2"></i>Programa:</strong>
-                                        <span class="badge badge-sena ms-2">{{ curso.programa }}</span>
-                                    </p>
-                                </div>
-                                <div class="col-sm-3">
-                                    <p class="mb-2">
-                                        <strong><i class="bi bi-hash text-muted me-2"></i>Código:</strong>
-                                        <span class="badge badge-sena ms-2">{{ curso.codigo }}</span>
-                                    </p>
-                                </div>
-                                <div class="col-sm-3">
-                                    <p class="mb-2">
-                                        <strong><i class="bi bi-calendar-check text-muted me-2"></i>Estado:</strong>
-                                        <span class="badge bg-success ms-2">{{ curso.estado }}</span>
-                                    </p>
-                                </div>
-                                <div class="col-sm-3">
-                                    <p class="mb-2">
-                                        <strong><i class="bi bi-calendar-check text-muted me-2"></i>Ambiente:</strong>
-                                        <span class="badge bg-success ms-2">{{ curso.aula }}</span>
-                                    </p>
-                                </div>
-                            </div>
-                            {% if curso.observaciones %}
-                            <div class="mt-3">
-                                <h6><i class="bi bi-info-circle text-muted me-2"></i>Observaciones:</h6>
-                                <p class="text-muted">{{ curso.observaciones }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
-                        <div class="col-md-4 text-center">
-                            <div class="bg-light rounded p-4">
-                                <i class="bi bi-mortarboard-fill text-success" style="font-size: 4rem;"></i>
-                                <h6 class="mt-2 text-muted"><strong>Horario:</strong> {{ curso.horario }}</h6>
-                            </div>
-                            <hr>
-                            <div class="bg-light rounded p-4">
-                                <i class="bi bi-mortarboard-fill text-success" style="font-size: 4rem;"></i>
-                                <h6 class="mt-2 text-muted"><strong>Fecha Inicio:</strong> {{ curso.fecha_inicio }}</h6>
-                                <h6 class="mt-2 text-muted"><strong>Fecha Finalización:</strong> {{ curso.fecha_fin }}</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Título y Subtítulo del Curso (Centralizado) -->
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h1 class="display-4 text-primary mb-2">{{ curso.nombre }}</h1>
+            <p class="lead text-muted">{% if curso.observaciones %}{{ curso.observaciones }}{% else %}Curso introductorio al desarrollo web. Se requiere conocimiento básico de lógica de programación.{% endif %}</p>
         </div>
     </div>
 
     <div class="row">
-        <!-- Card de Aprendices -->
-        <div class="col-lg-6 mb-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-people-fill me-2"></i>
-                        <h5 class="mb-0">Aprendices Registrados</h5>
-                    </div>
-                    <span class="badge bg-white text-success">{{ aprendices_curso|length }} estudiantes</span>
+        <!-- Columna Izquierda -->
+        <div class="col-lg-8">
+            <!-- Información del Curso -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header d-flex align-items-center bg-white border-bottom">
+                    <i class="bi bi-book-fill me-2 text-primary"></i>
+                    <h5 class="mb-0 text-primary">Información del Curso</h5>
                 </div>
                 <div class="card-body">
-                    <div class="list-group list-group-flush">
-                        {% for aprendiz in aprendices_curso %}
-                        <div class="list-group-item d-flex align-items-center px-0 border-0 border-bottom">
-                            <div class="flex-grow-1">
-                                <h6 class="mb-1">{{ aprendiz }}</h6>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <p class="mb-0">
+                                <strong><i class="bi bi-tag-fill text-muted me-2"></i>Programa:</strong>
+                                <span class="badge bg-success ms-2">{{ curso.programa }}</span>
+                            </p>
                         </div>
-                        {% endfor %}
+                        <div class="col-md-6 mb-3">
+                            <p class="mb-0">
+                                <strong><i class="bi bi-code-square text-muted me-2"></i>Código:</strong>
+                                <span class="badge bg-success ms-2">{{ curso.codigo }}</span>
+                            </p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p class="mb-0">
+                                <strong><i class="bi bi-check-circle-fill text-muted me-2"></i>Estado:</strong>
+                                <span class="badge bg-info ms-2">{{ curso.estado }}</span>
+                            </p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p class="mb-0">
+                                <strong><i class="bi bi-geo-alt-fill text-muted me-2"></i>Ambiente:</strong>
+                                <span class="badge bg-primary ms-2">{{ curso.aula }}</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                {% if aprendices_curso %}
-                    <div class="card-footer bg-transparent">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-muted">Lista de aprendices</small>
-                            <a href="{% url 'aprendices:lista_aprendices' %}" class="btn btn-sm btn-outline-success">
-                                <i class="bi bi-eye me-1"></i>Ver
-                            </a>
+            </div>
+
+            <div class="row mb-4">
+                <!-- Card de Estudiantes Registrados -->
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100 text-center">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                            <i class="bi bi-people-fill text-success mb-2" style="font-size: 2.5rem;"></i>
+                            <h3 class="mb-1">{{ aprendices_curso|length }}</h3>
+                            <p class="text-muted mb-0">Estudiantes Registrados</p>
                         </div>
                     </div>
-                {% endif %}
+                </div>
+                <!-- Card de Instructores -->
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100 text-center">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                            <i class="bi bi-person-workspace text-success mb-2" style="font-size: 2.5rem;"></i>
+                            <h3 class="mb-1">{{ instructores_curso|length }}</h3>
+                            <p class="text-muted mb-0">Instructores</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de Instructor Principal -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header d-flex align-items-center bg-white border-bottom">
+                    <i class="bi bi-person-badge-fill me-2 text-primary"></i>
+                    <h5 class="mb-0 text-primary">Instructor Principal</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="mb-1">Carlos Darío Gómez Pérez</h6> {# Hardcoded as per user's original variables #}
+                    <small class="text-muted">Ingeniería de Software y Gestión de Proyectos - 001<br>Frontend básico (Instructor Principal)</small> {# Hardcoded as per user's original variables #}
+                    <div class="mt-3">
+                        {# Botón deshabilitado ya que no se proporcionó una variable instructor_principal.id en el contexto #}
+                        <button class="btn btn-sm btn-outline-primary" disabled>Ver Perfil (No disponible)</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Card de Instructores -->
-        <div class="col-lg-6 mb-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-person-workspace me-2"></i>
-                        <h5 class="mb-0">Instructores del Curso</h5>
-                    </div>
-                    <span class="badge bg-white text-success">{{ instructores_curso|length }} instructores</span>
+        <!-- Columna Derecha -->
+        <div class="col-lg-4">
+            <div class="col-md-12 text-center"> {# Adjusted to col-md-12 to fit within col-lg-4 #}
+                <div class="bg-light rounded p-4 mb-4"> {# Added mb-4 for spacing #}
+                    <i class="bi bi-mortarboard-fill text-success" style="font-size: 4rem;"></i>
+                    <h6 class="mt-2 text-muted"><strong>Horario:</strong> {{ curso.horario }}</h6>
                 </div>
-                <div class="card-body">
-                    <div class="list-group list-group-flush">
-                        {% for instructor in instructores_curso %}
-                        <div class="list-group-item d-flex align-items-center px-0 border-0 border-bottom">
-                            <div class="flex-grow-1">
-                                <h6 class="mb-1">{{ instructor }}</h6>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
+                <hr>
+                <div class="bg-light rounded p-4">
+                    <i class="bi bi-mortarboard-fill text-success" style="font-size: 4rem;"></i>
+                    <h6 class="mt-2 text-muted"><strong>Fecha Inicio:</strong> {{ curso.fecha_inicio }}</h6>
+                    <h6 class="mt-2 text-muted"><strong>Fecha Finalización:</strong> {{ curso.fecha_fin }}</h6>
                 </div>
-                {% if instructores_curso %}
-                <div class="card-footer bg-transparent">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted">Lista de Instructores</small>
-                        <a href="{% url 'instructores:lista_instructores' %}" class="btn btn-sm btn-outline-success">
-                            <i class="bi bi-eye me-1"></i>Ver
-                        </a>
-                    </div>
-                </div>
-                {% endif %}
             </div>
         </div>
     </div>
