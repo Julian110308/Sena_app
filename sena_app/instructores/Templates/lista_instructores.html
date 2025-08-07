@@ -23,7 +23,11 @@
     <div class="col">
         <div class="card h-100 shadow-sm">
             <div class="card-header bg-dark text-white">
-                <h5 class="mb-0">{{ instructor.nombre_completo }}</h5>
+                <h5 class="mb-0">
+                    <a href="instructor/{{ instructor.id }}" class="text-white text-decoration-none">
+                        {{ instructor.nombre_completo }}
+                    </a>
+                </h5>
             </div>
             <div class="card-body">
                 <p class="card-text mb-1"><strong>Documento:</strong> {{ instructor.documento_identidad }} ({{ instructor.tipo_documento }})</p>

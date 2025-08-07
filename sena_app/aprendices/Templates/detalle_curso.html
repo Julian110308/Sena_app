@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container-fluid py-4">
-    <!-- Breadcrumb y Navegación -->
+
     <div class="row mb-4">
         <div class="col-12">
             <nav aria-label="breadcrumb">
@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <!-- Título y Subtítulo del Curso (Centralizado) -->
+
     <div class="row mb-5">
         <div class="col-12 text-center">
             <h1 class="display-4 text-primary mb-2">{{ curso.nombre }}</h1>
@@ -24,9 +24,9 @@
     </div>
 
     <div class="row">
-        <!-- Columna Izquierda -->
+
         <div class="col-lg-8">
-            <!-- Información del Curso -->
+
             <div class="card shadow-sm mb-4">
                 <div class="card-header d-flex align-items-center bg-white border-bottom">
                     <i class="bi bi-book-fill me-2 text-primary"></i>
@@ -63,7 +63,7 @@
             </div>
 
             <div class="row mb-4">
-                <!-- Card de Estudiantes Registrados -->
+
                 <div class="col-md-6">
                     <div class="card shadow-sm h-100 text-center">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card de Instructores -->
+
                 <div class="col-md-6">
                     <div class="card shadow-sm h-100 text-center">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
@@ -85,27 +85,23 @@
                 </div>
             </div>
 
-            <!-- Card de Instructor Principal -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header d-flex align-items-center bg-white border-bottom">
                     <i class="bi bi-person-badge-fill me-2 text-primary"></i>
                     <h5 class="mb-0 text-primary">Instructor Principal</h5>
                 </div>
                 <div class="card-body">
-                    <h6 class="mb-1">Carlos Darío Gómez Pérez</h6> {# Hardcoded as per user's original variables #}
-                    <small class="text-muted">Ingeniería de Software y Gestión de Proyectos - 001<br>Frontend básico (Instructor Principal)</small> {# Hardcoded as per user's original variables #}
-                    <div class="mt-3">
-                        {# Botón deshabilitado ya que no se proporcionó una variable instructor_principal.id en el contexto #}
+                    <h6 class="mb-1">Carlos Darío Gómez Pérez</h6>
+                    <small class="text-muted">Ingeniería de Software y Gestión de Proyectos - 001<br>Frontend básico (Instructor Principal)</small>
                         <button class="btn btn-sm btn-outline-primary" disabled>Ver Perfil (No disponible)</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Columna Derecha -->
         <div class="col-lg-4">
-            <div class="col-md-12 text-center"> {# Adjusted to col-md-12 to fit within col-lg-4 #}
-                <div class="bg-light rounded p-4 mb-4"> {# Added mb-4 for spacing #}
+            <div class="col-md-12 text-center">
+                <div class="bg-light rounded p-4 mb-4"> 
                     <i class="bi bi-mortarboard-fill text-success" style="font-size: 4rem;"></i>
                     <h6 class="mt-2 text-muted"><strong>Horario:</strong> {{ curso.horario }}</h6>
                 </div>
