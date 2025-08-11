@@ -16,12 +16,14 @@
 </div>
 
 {% if lista_aprendices %}
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"> {# Grid para organizar las tarjetas en columnas #}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     {% for aprendiz in lista_aprendices %}
     <div class="col">
-        <div class="card h-100 shadow-sm"> {# h-100 asegura que todas las tarjetas tengan la misma altura #}
+        <div class="card h-100 shadow-sm">
             <div class="card-header bg-dark text-white">
-                <h5 class="mb-0">{{ aprendiz.nombre_completo }}</h5>
+                <a href="aprendiz/{{ aprendiz.id }}" class="text-white text-decoration-none">
+                    {{ aprendiz.nombre_completo }}
+                </a>
             </div>
             <div class="card-body">
                 <p class="card-text mb-1"><strong>Documento:</strong> {{ aprendiz.documento_identidad }}</p>

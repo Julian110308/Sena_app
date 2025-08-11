@@ -23,7 +23,9 @@
     <div class="col">
         <div class="card h-100 shadow-sm">
             <div class="card-header bg-dark text-white">
-                <h5 class="mb-0">{{ programa.nombre }}</h5>
+                <h5 class="mb-0"><a href="programa/{{ programa.id }}" class="text-white text-decoration-none">
+                        {{ programa.nombre }}
+                    </a></h5>
             </div>
             <div class="card-body">
                 <p class="card-text mb-1"><strong>Código:</strong> {{ programa.codigo }}</p>
