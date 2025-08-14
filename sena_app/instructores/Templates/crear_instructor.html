@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Instructor - SENA APP{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-user-plus"></i> Agregar Instructor
+                </h3>
+            </div>
+            <div class="card-body">
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>¡Error en el formulario!</strong> Por favor, corrige los siguientes errores:
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li>{{ field|title }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.tipo_documento.id_for_label }}">{{ form.tipo_documento.label }}</label>
+                            <select class="form-select" id="{{ form.tipo_documento.id_for_label }}" name="{{ form.tipo_documento.name }}">
+                                {% for value, text in form.tipo_documento.field.choices %}
+                                    <option value="{{ value }}" {% if form.tipo_documento.value == value %}selected{% endif %}>{{ text }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="form-text text-muted">{{ form.tipo_documento.help_text }}</small>
+                            {% for error in form.tipo_documento.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.documento_identidad.id_for_label }}">{{ form.documento_identidad.label }} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="{{ form.documento_identidad.id_for_label }}" name="{{ form.documento_identidad.name }}" value="{{ form.documento_identidad.value|default:'' }}" required>
+                            <small class="form-text text-muted">{{ form.documento_identidad.help_text }}</small>
+                            {% for error in form.documento_identidad.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label }} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="{{ form.nombre.id_for_label }}" name="{{ form.nombre.name }}" value="{{ form.nombre.value|default:'' }}" required>
+                            <small class="form-text text-muted">{{ form.nombre.help_text }}</small>
+                            {% for error in form.nombre.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.apellido.id_for_label }}">{{ form.apellido.label }} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="{{ form.apellido.id_for_label }}" name="{{ form.apellido.name }}" value="{{ form.apellido.value|default:'' }}" required>
+                            <small class="form-text text-muted">{{ form.apellido.help_text }}</small>
+                            {% for error in form.apellido.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.telefono.id_for_label }}">{{ form.telefono.label }}</label>
+                            <input type="tel" class="form-control" id="{{ form.telefono.id_for_label }}" name="{{ form.telefono.name }}" value="{{ form.telefono.value|default:'' }}">
+                            <small class="form-text text-muted">{{ form.telefono.help_text }}</small>
+                            {% for error in form.telefono.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.correo.id_for_label }}">{{ form.correo.label }}</label>
+                            <input type="email" class="form-control" id="{{ form.correo.id_for_label }}" name="{{ form.correo.name }}" value="{{ form.correo.value|default:'' }}">
+                            <small class="form-text text-muted">{{ form.correo.help_text }}</small>
+                            {% for error in form.correo.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.ciudad.id_for_label }}">{{ form.ciudad.label }}</label>
+                            <input type="text" class="form-control" id="{{ form.ciudad.id_for_label }}" name="{{ form.ciudad.name }}" value="{{ form.ciudad.value|default:'' }}">
+                            <small class="form-text text-muted">{{ form.ciudad.help_text }}</small>
+                            {% for error in form.ciudad.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.direccion.id_for_label }}">{{ form.direccion.label }} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="{{ form.direccion.id_for_label }}" name="{{ form.direccion.name }}" value="{{ form.direccion.value|default:'' }}" required>
+                            <small class="form-text text-muted">{{ form.direccion.help_text }}</small>
+                            {% for error in form.direccion.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.nivel_educativo.id_for_label }}">{{ form.nivel_educativo.label }}</label>
+                            <select class="form-select" id="{{ form.nivel_educativo.id_for_label }}" name="{{ form.nivel_educativo.name }}">
+                                {% for value, text in form.nivel_educativo.field.choices %}
+                                    <option value="{{ value }}" {% if form.nivel_educativo.value == value %}selected{% endif %}>{{ text }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="form-text text-muted">{{ form.nivel_educativo.help_text }}</small>
+                            {% for error in form.nivel_educativo.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.especialidad.id_for_label }}">{{ form.especialidad.label }} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="{{ form.especialidad.id_for_label }}" name="{{ form.especialidad.name }}" value="{{ form.especialidad.value|default:'' }}" required>
+                            <small class="form-text text-muted">{{ form.especialidad.help_text }}</small>
+                            {% for error in form.especialidad.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.anos_experiencia.id_for_label }}">{{ form.anos_experiencia.label }}</label>
+                            <input type="number" class="form-control" id="{{ form.anos_experiencia.id_for_label }}" name="{{ form.anos_experiencia.name }}" value="{{ form.anos_experiencia.value|default:'' }}">
+                            <small class="form-text text-muted">{{ form.anos_experiencia.help_text }}</small>
+                            {% for error in form.anos_experiencia.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.activo.id_for_label }}">{{ form.activo.label }} <span class="text-danger">*</span></label>
+                            <select class="form-select" id="{{ form.activo.id_for_label }}" name="{{ form.activo.name }}">
+                                {% for value, text in form.activo.field.choices %}
+                                    <option value="{{ value }}" {% if form.activo.value == value %}selected{% endif %}>{{ text }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="form-text text-muted">{{ form.activo.help_text }}</small>
+                            {% for error in form.activo.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.fecha_vinculacion.id_for_label }}">{{ form.fecha_vinculacion.label }}</label>
+                            <input type="date" class="form-control" id="{{ form.fecha_vinculacion.id_for_label }}" name="{{ form.fecha_vinculacion.name }}" value="{{ form.fecha_vinculacion.value|date:'Y-m-d' }}">
+                            <small class="form-text text-muted">{{ form.fecha_vinculacion.help_text }}</small>
+                            {% for error in form.fecha_vinculacion.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.fecha_registro.id_for_label }}">{{ form.fecha_registro.label }}</label>
+                            <input type="text" class="form-control" id="{{ form.fecha_registro.id_for_label }}" name="{{ form.fecha_registro.name }}" value="{{ form.fecha_registro.value|date:'Y-m-d H:i' }}" readonly>
+                            <small class="form-text text-muted">{{ form.fecha_registro.help_text }}</small>
+                            {% for error in form.fecha_registro.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.fecha_nacimiento.id_for_label }}">{{ form.fecha_nacimiento.label }} <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" id="{{ form.fecha_nacimiento.id_for_label }}" name="{{ form.fecha_nacimiento.name }}" value="{{ form.fecha_nacimiento.value|date:'Y-m-d' }}" required>
+                            <small class="form-text text-muted">{{ form.fecha_nacimiento.help_text }}</small>
+                            {% for error in form.fecha_nacimiento.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'instructores:lista_instructores' %}" class="btn btn-secondary me-md-2">
+                            <i class="fas fa-times"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Guardar Instructor
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="mt-3">
+            <small class="text-muted">
+                <i class="fas fa-info-circle"></i> 
+                Los campos marcados con <span class="text-danger">*</span> son obligatorios.
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}

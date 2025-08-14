@@ -9,7 +9,7 @@
             <h2>Lista de Programas que el SENA ofrece</h2>
             <div>
                 <span class="badge bg-info fs-6">Total: <span class="visually-hidden">Hay </span>{{ total_programas }} Programas</span>
-                <a href="{% url 'admin:programas_programa_add' %}" class="btn btn-success ms-2" role="button" aria-label="Añadir nuevo programa">
+                <a href="{% url 'programas:crear_programa' %}" class="btn btn-success ms-2" role="button" aria-label="Añadir nuevo programa">
                     <i class="fas fa-plus-circle me-1"></i> Nuevo Programa
                 </a>
             </div>

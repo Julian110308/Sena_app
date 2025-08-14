@@ -1,8 +1,13 @@
-from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
-from .models import Aprendiz, Curso
 
+from .models import Aprendiz, Curso
+from django.shortcuts import get_object_or_404
+from instructores.models import Instructor
+from programas.models import Programa
+
+from aprendices.forms import AprendizForm
+from django.views import generic
 def aprendices(request):
     lista_aprendices = Aprendiz.objects.all()
     template = loader.get_template('lista_aprendices.html')
@@ -57,3 +62,13 @@ def detalle_aprendiz(request, aprendiz_id):
         'aprendiz': aprendiz,
     }
     return HttpResponse(template.render(context, request))
+
+class AprendizFormView(generic.FormView):
+    template_name = "agregar_aprendiz.html"
+    form_class = AprendizForm
+    success_url = "../aprendices/"
+
+#Metodo para guardar el Formulario
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)

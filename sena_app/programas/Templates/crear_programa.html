@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Programa - SENA APP{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-book-reader"></i> Agregar Programa de Formación
+                </h3>
+            </div>
+            <div class="card-body">
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>¡Error en el formulario!</strong> Por favor, corrige los siguientes errores:
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li>{{ field|title }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.codigo.id_for_label }}">{{ form.codigo.label }} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="{{ form.codigo.id_for_label }}" name="{{ form.codigo.name }}" value="{{ form.codigo.value|default:'' }}" required>
+                            <small class="form-text text-muted">{{ form.codigo.help_text }}</small>
+                            {% for error in form.codigo.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label }} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="{{ form.nombre.id_for_label }}" name="{{ form.nombre.name }}" value="{{ form.nombre.value|default:'' }}" required>
+                            <small class="form-text text-muted">{{ form.nombre.help_text }}</small>
+                            {% for error in form.nombre.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.nivel_formacion.id_for_label }}">{{ form.nivel_formacion.label }}</label>
+                            <select class="form-select" id="{{ form.nivel_formacion.id_for_label }}" name="{{ form.nivel_formacion.name }}">
+                                {% for value, text in form.nivel_formacion.field.choices %}
+                                    <option value="{{ value }}" {% if form.nivel_formacion.value == value %}selected{% endif %}>{{ text }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="form-text text-muted">{{ form.nivel_formacion.help_text }}</small>
+                            {% for error in form.nivel_formacion.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.modalidad.id_for_label }}">{{ form.modalidad.label }}</label>
+                            <select class="form-select" id="{{ form.modalidad.id_for_label }}" name="{{ form.modalidad.name }}">
+                                {% for value, text in form.modalidad.field.choices %}
+                                    <option value="{{ value }}" {% if form.modalidad.value == value %}selected{% endif %}>{{ text }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="form-text text-muted">{{ form.modalidad.help_text }}</small>
+                            {% for error in form.modalidad.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.duracion_meses.id_for_label }}">{{ form.duracion_meses.label }}</label>
+                            <input type="number" class="form-control" id="{{ form.duracion_meses.id_for_label }}" name="{{ form.duracion_meses.name }}" value="{{ form.duracion_meses.value|default:'' }}">
+                            <small class="form-text text-muted">{{ form.duracion_meses.help_text }}</small>
+                            {% for error in form.duracion_meses.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.duracion_horas.id_for_label }}">{{ form.duracion_horas.label }}</label>
+                            <input type="number" class="form-control" id="{{ form.duracion_horas.id_for_label }}" name="{{ form.duracion_horas.name }}" value="{{ form.duracion_horas.value|default:'' }}">
+                            <small class="form-text text-muted">{{ form.duracion_horas.help_text }}</small>
+                            {% for error in form.duracion_horas.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.descripcion.id_for_label }}">{{ form.descripcion.label }}</label>
+                        <textarea class="form-control" id="{{ form.descripcion.id_for_label }}" name="{{ form.descripcion.name }}" rows="3">{{ form.descripcion.value|default:'' }}</textarea>
+                        <small class="form-text text-muted">{{ form.descripcion.help_text }}</small>
+                        {% for error in form.descripcion.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.competencias.id_for_label }}">{{ form.competencias.label }}</label>
+                        <textarea class="form-control" id="{{ form.competencias.id_for_label }}" name="{{ form.competencias.name }}" rows="3">{{ form.competencias.value|default:'' }}</textarea>
+                        <small class="form-text text-muted">{{ form.competencias.help_text }}</small>
+                        {% for error in form.competencias.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.perfil_egreso.id_for_label }}">{{ form.perfil_egreso.label }}</label>
+                        <textarea class="form-control" id="{{ form.perfil_egreso.id_for_label }}" name="{{ form.perfil_egreso.name }}" rows="3">{{ form.perfil_egreso.value|default:'' }}</textarea>
+                        <small class="form-text text-muted">{{ form.perfil_egreso.help_text }}</small>
+                        {% for error in form.perfil_egreso.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.requisitos_ingreso.id_for_label }}">{{ form.requisitos_ingreso.label }}</label>
+                        <textarea class="form-control" id="{{ form.requisitos_ingreso.id_for_label }}" name="{{ form.requisitos_ingreso.name }}" rows="3">{{ form.requisitos_ingreso.value|default:'' }}</textarea>
+                        <small class="form-text text-muted">{{ form.requisitos_ingreso.help_text }}</small>
+                        {% for error in form.requisitos_ingreso.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.centro_formacion.id_for_label }}">{{ form.centro_formacion.label }}</label>
+                            <input type="text" class="form-control" id="{{ form.centro_formacion.id_for_label }}" name="{{ form.centro_formacion.name }}" value="{{ form.centro_formacion.value|default:'' }}">
+                            <small class="form-text text-muted">{{ form.centro_formacion.help_text }}</small>
+                            {% for error in form.centro_formacion.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.regional.id_for_label }}">{{ form.regional.label }}</label>
+                            <input type="text" class="form-control" id="{{ form.regional.id_for_label }}" name="{{ form.regional.name }}" value="{{ form.regional.value|default:'' }}">
+                            <small class="form-text text-muted">{{ form.regional.help_text }}</small>
+                            {% for error in form.regional.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.estado.id_for_label }}">{{ form.estado.label }}</label>
+                            <select class="form-select" id="{{ form.estado.id_for_label }}" name="{{ form.estado.name }}">
+                                {% for value, text in form.estado.field.choices %}
+                                    <option value="{{ value }}" {% if form.estado.value == value %}selected{% endif %}>{{ text }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="form-text text-muted">{{ form.estado.help_text }}</small>
+                            {% for error in form.estado.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.fecha_creacion.id_for_label }}">{{ form.fecha_creacion.label }}</label>
+                            <input type="date" class="form-control" id="{{ form.fecha_creacion.id_for_label }}" name="{{ form.fecha_creacion.name }}" value="{{ form.fecha_creacion.value|date:'Y-m-d' }}">
+                            <small class="form-text text-muted">{{ form.fecha_creacion.help_text }}</small>
+                            {% for error in form.fecha_creacion.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.fecha_registro.id_for_label }}">{{ form.fecha_registro.label }}</label>
+                            <input type="text" class="form-control" id="{{ form.fecha_registro.id_for_label }}" name="{{ form.fecha_registro.name }}" value="{{ form.fecha_registro.value|date:'Y-m-d H:i' }}" readonly>
+                            <small class="form-text text-muted">{{ form.fecha_registro.help_text }}</small>
+                            {% for error in form.fecha_registro.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'programas:lista_programas' %}" class="btn btn-secondary me-md-2">
+                            <i class="fas fa-times"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Guardar Programa
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="mt-3">
+            <small class="text-muted">
+                <i class="fas fa-info-circle"></i> 
+                Los campos marcados con <span class="text-danger">*</span> son obligatorios.
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}
